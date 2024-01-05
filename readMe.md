@@ -5,7 +5,7 @@ Description:
 
 Accessibility:
     The application is already hosted and running following this link:
-        https://carloicorcuera.github.io/to-do-list-application/
+        ~~https://carloicorcuera.github.io/to-do-list-application/~~
 
 Features:
     Create Task: Adds a new task/to-do item, this includes title, author and task.
