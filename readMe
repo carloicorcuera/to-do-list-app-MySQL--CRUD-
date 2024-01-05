@@ -19,10 +19,10 @@ Installation:
 
 Steps:
     Clone the repository:
-        git clone https://github.com/carloicorcuera/to-do-list-app--CRUD-.git
+        git clone https://github.com/carloicorcuera/to-do-list-app-MySQL--CRUD-.git
     
     Navigate to the project directory:
-        cd to-do-list-app--CRUD-/
+        cd to-do-list-app-MySQL--CRUD-/
 
     Install dependencies:
         npm install
@@ -35,27 +35,26 @@ Steps:
             id INT AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
+            imagePath VARCHAR(255) NOT NULL;
             task VARCHAR(255) NOT NULL,
             isActive TINYINT(1) NOT NULL DEFAULT 1,
             createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );
 
-        INSERT INTO tasks (title, author, task, isActive) VALUES ('Refactor Backend', 'Charlie Chapman', 'Refactor the backend services for better performance', 1);
-        INSERT INTO tasks (title, author, task, isActive) VALUES ('Update Documentation', 'Diana Doyle', 'Update the project documentation with the latest changes', 1);
-
     Start the server:
         npm start
 
     Run the test:
-        npm run test
+        ~~npm run test~~
+        Issues arise since the integration of upload file/image that was pass through the test cases in MySQL. 
 
 Usage:
     1. Accessing the Application:
-        - Open your web browser and navigate to http://localhost:8001 (or the configured port).
+        - Open your web browser and navigate to http://localhost:8008 (or the configured port).
     
     2. Adding a Task:
-        - Use the provided form to input the task's title, author, and description. Submit to create a new task.
+        - Use the provided form to input the task's title, author, description and even file/images. Submit to create a new task.
     
     3. Viewing Tasks:
         - The main page displays tasks in a paginated format. Navigate through pages to view more tasks.

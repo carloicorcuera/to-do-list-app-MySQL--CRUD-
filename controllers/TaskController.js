@@ -3,9 +3,10 @@ const pool = require('../db.js');
 // Create Task
 module.exports.registerTask = async (request, response) => {
     const { title, author, task } = request.body;
+    const file = request.file;  // This is your file object from Multer
 
     try {
-      if (!title || !author || !task) {
+      if (!title || !author || !task || !file) {
         return response.status(400).json({ error: "Request is Empty" });
       }
     
@@ -17,7 +18,7 @@ module.exports.registerTask = async (request, response) => {
         }
     
         // Business logic for user registration
-        const [result] = await pool.query("INSERT INTO tasks (title, author, task) VALUES (?, ?, ?)", [title, author, task]);
+        const [ result ] = await pool.query("INSERT INTO tasks (title, author, task, imagePath) VALUES (?, ?, ?, ?)", [title, author, task, file.path]);
 
         // Respond with success message
         response.status(201).json({
@@ -54,35 +55,36 @@ module.exports.getTasks = async (request, response) => {
 
 // Update Task
 module.exports.updateTask = async (request, response) => {
-    try {
+  try {
+      const { title, author, task } = request.body;
+      const file = request.file;  // This is your file object from Multer
 
-        const { title, author, task } = request.body;
+      // Extract taskId and update details from request
+      const taskId = request.params.id; // assuming id is passed as URL parameter
 
-        // Extract _id and update details from request
-        const taskId = request.params.id; // assuming _id is passed as URL parameter
+      // Check for required fields and file
+      if (!title || !author || !task || !file) {
+          return response.status(400).json({ error: "Invalid input data, missing title, author, task, or file" });
+      };
 
-        // Check for required fields
-        if (!title || !author || !task) {
-            return response.status(400).json({ error: "Invalid input data, missing title, author, or task" });
-        };
+      // Update the task with new details and file path
+      const [result] = await pool.query("UPDATE tasks SET title = ?, author = ?, task = ?, imagePath = ? WHERE id = ?", [title, author, task, file.path, taskId]);
 
-        const [result] = await pool.query("UPDATE tasks SET title = ?, author = ?, task = ? WHERE id = ?", [title, author, task, taskId]);
+      // Check if any task was actually updated
+      if (result.affectedRows === 0) {
+          return response.status(404).json({ message: 'Task not found' });
+      }
 
-        // Check if any task was actually updated
-        if (result.affectedRows === 0) {
-            return response.status(404).json({ message: 'Task not found' });
-        }
+      // Respond with success message
+      response.status(200).json({
+          message: 'Task successfully updated!',
+          taskId: taskId  // Returning the ID of the updated task
+      });
 
-        // Respond with success message
-        response.status(200).json({
-            message: 'Task successfully updated!',
-            taskId: taskId  // Returning the ID of the updated task
-        });
-
-    } catch (error) {
-        console.error('Error in updating task:', error);
-        response.status(500).json({ error: 'Internal Server Error' });
-    }
+  } catch (error) {
+      console.error('Error in updating task:', error);
+      response.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 // Archive Task

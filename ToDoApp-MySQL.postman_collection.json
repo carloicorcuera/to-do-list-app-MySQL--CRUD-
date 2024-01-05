@@ -87,10 +87,31 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Learn Backend\",\r\n    \"author\": \"Mr. Carlo Corcuera\",\r\n    \"task\": \"Learning BE is essential as a NodeJS Developer\"\r\n}",
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Integrate Image Upload12",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "Carlo",
+							"type": "text"
+						},
+						{
+							"key": "task",
+							"value": "Utilize multer in file uploading. ",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "C:\\Users\\Carlo Corcuera\\Downloads\\imb-practitioner-enterprise-design-thinking.png"
+						}
+					],
 					"options": {
-						"raw": {
+						"formdata": {
 							"language": "json"
 						}
 					}
@@ -116,7 +137,7 @@
 						}
 					}
 				},
-				"url": "localhost:8001/tasks/all"
+				"url": "localhost:8008/tasks/all"
 			},
 			"response": []
 		},
@@ -126,15 +147,36 @@
 				"method": "PATCH",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"First Task\",\r\n    \"subtitle\": \"This is my First Task\",\r\n    \"task\": \"Read more Documentations\"\r\n}",
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Integrate Image Upload12",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "Carlo",
+							"type": "text"
+						},
+						{
+							"key": "task",
+							"value": "Utilize multer in file uploading. ",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "C:\\Users\\Carlo Corcuera\\Downloads\\imb-practitioner-enterprise-design-thinking.png"
+						}
+					],
 					"options": {
-						"raw": {
+						"formdata": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8001/tasks/update/6594d1446bdc71fb24999db4"
+				"url": "localhost:8008/tasks/update/4"
 			},
 			"response": []
 		},
